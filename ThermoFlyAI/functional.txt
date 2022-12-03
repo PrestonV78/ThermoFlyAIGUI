@@ -12,23 +12,15 @@ import {
 } from "react-native";
 import { useFonts } from "expo-font";
 
-function App() {
-  const [temp, setTemp] = useState(70);
 
-  function desiredLower() {
-    console.log("Desired Lower");
-    setTemp((prevTemp) => prevTemp - 1);
-  }
-
-  function desiredHigher() {
-    console.log("Desired Higher");
-    setTemp((prevTemp) => prevTemp + 1);
-  }
+export default function App() {
 
   //Changing Variables
-  let currentTemp = 70;
-  let desiredTemp = temp;
-  let externalTemp = 35;
+  let currentTemp = 69;
+  let desiredTemp = 70;
+  let externalTemp = 85;
+
+  const [temp, setTemp] = useState(desiredTemp);
 
   let image =
     currentTemp < desiredTemp
@@ -173,7 +165,9 @@ function App() {
           <View style={{ width: "8%" }} />
           <TouchableOpacity
             style={{ marginBottom: 5, marginTop: 5, padding: 0, width: "20%" }}
-            onPress={() =>desiredHigher()}
+            onPress={() => {
+              setTemp(temp + 1)
+            }}
           >
             <Image
               source={require("./assets/Up.png")}
@@ -199,7 +193,9 @@ function App() {
           <View style={{ width: "10%" }} />
           <TouchableOpacity
             style={{ marginBottom: 5, marginTop: 5, padding: 0, width: "20%" }}
-            onPress={() =>desiredLower()}
+            onPress={() => {
+              setTemp(temp - 1)
+            }}
           >
             <Image
               source={require("./assets/Down.png")}
@@ -256,5 +252,3 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
 });
-
-export default App;
